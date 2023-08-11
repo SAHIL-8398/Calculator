@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-weight: 400;
+    }
+    .calculator {
+      width: 300px;
+      background-color: #5c5555;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 50px auto;
+      text-align: center;
+      color: #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .input-box {
+      width: 95%;
+      height: 50px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    .row {
+      display: flex;
+    }
+    .button {
+      flex: 1;
+      height: 60px;
+      font-size: 24px;
+      margin: 5px;
+      padding:5px;
+      border-radius: 12px;
+      background-color: rgb(0, 0, 0);
+      cursor: pointer;
+      
+    }
+
+    .button:hover {
+      background-color: #ddd;
+    }
+    .orange {
+      background-color: orange;
+    }
+    .equals {
+      flex: 2.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="input-box" id="result" readonly>
+    <div class="row">
+      <div class="button" onclick="clearDisplay()">AC</div>
+      <div class="button" onclick="changeSign()">+/-</div>
+      <div class="button" onclick="appendSymbol('%')">%</div>
+      <div class="button orange" onclick="appendSymbol('/')">/</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendSymbol('7')">7</div>
+      <div class="button" onclick="appendSymbol('8')">8</div>
+      <div class="button" onclick="appendSymbol('9')">9</div>
+      <div class="button orange" onclick="appendSymbol('*')">X</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendSymbol('4')">4</div>
+      <div class="button" onclick="appendSymbol('5')">5</div>
+      <div class="button" onclick="appendSymbol('6')">6</div>
+      <div class="button orange" onclick="appendSymbol('-')">-</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendSymbol('1')">1</div>
+      <div class="button" onclick="appendSymbol('2')">2</div>
+      <div class="button" onclick="appendSymbol('3')">3</div>
+      <div class="button orange" onclick="appendSymbol('+')">+</div>
+    </div>
+    <div class="row">
+      <div class="button equals" onclick="appendSymbol('0')">0</div>
+      <div class="button" onclick="appendSymbol('.')">.</div>
+      <div class="button" onclick="calculate()">=</div>
+    </div>
+  </div>
+
+  <script>
+    function appendSymbol(symbol) {
+      document.getElementById("result").value += symbol;
+    }
+
+    function clearDisplay() {
+      document.getElementById("result").value = "";
+    }
+
+    function changeSign() {
+      const result = document.getElementById("result");
+      if (result.value !== "") {
+        result.value = parseFloat(result.value) * -1;
+      }
+    }
+
+    function calculate() {
+      const result = document.getElementById("result");
+      try {
+        result.value = eval(result.value);
+      } catch (error) {
+        result.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
